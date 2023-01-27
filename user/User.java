@@ -1,6 +1,10 @@
 package com.vsd.SocialMediaApp.user;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.vsd.SocialMediaApp.post.Post;
 import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 public class User {
@@ -11,7 +15,11 @@ public class User {
     private String name;
 
     @Column(unique = true)
-    private String Email;
+    private String email;
+
+    @OneToMany(targetEntity = com.vsd.SocialMediaApp.post.Post.class, cascade = CascadeType.ALL)
+    private List<Post> posts;
+
 
     public Integer getId() {
         return id;
@@ -30,10 +38,18 @@ public class User {
     }
 
     public String getEmail() {
-        return Email;
+        return email;
     }
 
     public void setEmail(String email) {
-        Email = email;
+        email = email;
+    }
+
+    public List<Post> getPosts() {
+        return posts;
+    }
+
+    public void setPosts(List<Post> posts) {
+        this.posts = posts;
     }
 }

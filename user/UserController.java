@@ -19,4 +19,9 @@ public class UserController {
         userService.addUser(user);
         return "Saved";
     }
+
+    @GetMapping("/users")
+    public @ResponseBody Iterable<User> getUser(@RequestHeader String email){
+        return userService.getUser(email);
+    }
 }
